@@ -3,381 +3,441 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BrandScaper Africa - Marketing Excellence Presentation</title>
+    <title>Brandscapers Africa - Marketing Excellence Presentation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
-        /* CSS Reset */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Base Styles */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #374151;
-            background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             min-height: 100vh;
             padding: 20px;
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1200px;
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating particles */
+        .particle {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 8s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 1s; animation-duration: 10s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 2s; animation-duration: 7s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 1.5s; animation-duration: 9s; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 3s; animation-duration: 11s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 0.5s; animation-duration: 8s; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 2.5s; animation-duration: 10s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 1.2s; animation-duration: 9s; }
+
+        .presentation-container {
+            max-width: 1400px;
             margin: 0 auto;
-        }
-
-        /* Presentation Styles */
-        .presentation {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            padding: 60px;
-            min-height: 600px;
             position: relative;
-            margin-bottom: 30px;
+            z-index: 10;
         }
 
-        .slide-header {
-            margin-bottom: 40px;
+        .presentation-card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            box-shadow: 
+                0 30px 90px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.5),
+                inset 0 2px 0 rgba(255, 255, 255, 0.8);
+            padding: 60px;
+            min-height: 700px;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .presentation-card:hover {
+            transform: translateY(-10px) scale(1.01);
+            box-shadow: 
+                0 40px 120px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.5),
+                inset 0 2px 0 rgba(255, 255, 255, 0.8);
         }
 
         .slide-title {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #1f2937;
-            margin-bottom: 10px;
-        }
-
-        .slide-subtitle {
-            font-size: 1.5rem;
-            color: #6b7280;
-        }
-
-        .slide-content {
-            margin-bottom: 60px;
-        }
-
-        /* Navigation */
-        .navigation {
-            position: absolute;
-            bottom: 30px;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 60px;
-        }
-
-        .nav-button {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            background: #2563eb;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .nav-button:hover {
-            background: #1d4ed8;
-        }
-
-        .nav-button:disabled {
-            background: #d1d5db;
-            cursor: not-allowed;
-        }
-
-        .slide-counter {
-            color: #6b7280;
-            font-weight: 600;
-        }
-
-        /* Content Styles */
-        .text-center {
-            text-align: center;
-        }
-
-        .space-y-8 > * + * {
-            margin-top: 32px;
-        }
-
-        .space-y-6 > * + * {
-            margin-top: 24px;
-        }
-
-        .space-y-4 > * + * {
-            margin-top: 16px;
-        }
-
-        .space-y-3 > * + * {
-            margin-top: 12px;
-        }
-
-        .space-y-2 > * + * {
-            margin-top: 8px;
-        }
-
-        .space-y-1 > * + * {
-            margin-top: 4px;
-        }
-
-        .gradient-text {
-            background: linear-gradient(to right, #f97316, #dc2626);
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: titleShine 4s ease infinite;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
         }
 
-        .gradient-bg-blue {
-            background: linear-gradient(to right, #2563eb, #7c3aed);
+        @keyframes titleShine {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .slide-subtitle {
+            font-size: 1.8rem;
+            color: #6b7280;
+            font-weight: 300;
+            margin-bottom: 40px;
+        }
+
+        .gradient-card {
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+        }
+
+        .gradient-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s, transform 0.6s;
+        }
+
+        .gradient-card:hover::before {
+            opacity: 1;
+            animation: shimmer 2s infinite;
+        }
+
+        .gradient-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes shimmer {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .gradient-blue {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             color: white;
+            box-shadow: 0 10px 40px rgba(79, 172, 254, 0.4);
         }
 
-        .gradient-bg-red {
-            background: linear-gradient(to right, #dc2626, #ea580c);
+        .gradient-blue:hover {
+            box-shadow: 0 20px 60px rgba(79, 172, 254, 0.6);
+        }
+
+        .gradient-red {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
             color: white;
+            box-shadow: 0 10px 40px rgba(250, 112, 154, 0.4);
         }
 
-        .gradient-bg-teal {
-            background: linear-gradient(to right, #3b82f6, #14b8a6);
+        .gradient-red:hover {
+            box-shadow: 0 20px 60px rgba(250, 112, 154, 0.6);
+        }
+
+        .gradient-teal {
+            background: linear-gradient(135deg, #13547a 0%, #80d0c7 100%);
             color: white;
+            box-shadow: 0 10px 40px rgba(19, 84, 122, 0.4);
         }
 
-        .gradient-bg-purple {
-            background: linear-gradient(to right, #7c3aed, #db2777);
+        .gradient-teal:hover {
+            box-shadow: 0 20px 60px rgba(19, 84, 122, 0.6);
+        }
+
+        .gradient-purple {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
         }
 
-        .gradient-bg-orange {
-            background: linear-gradient(to right, #f97316, #dc2626);
+        .gradient-purple:hover {
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.6);
+        }
+
+        .gradient-orange {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
+            box-shadow: 0 10px 40px rgba(240, 147, 251, 0.4);
         }
 
-        .bg-gray-50 {
-            background-color: #f9fafb;
+        .gradient-orange:hover {
+            box-shadow: 0 20px 60px rgba(240, 147, 251, 0.6);
         }
 
-        .bg-blue-50 {
-            background-color: #eff6ff;
+        .info-card {
+            background: rgba(249, 250, 251, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 2px solid rgba(229, 231, 235, 0.5);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .bg-purple-50 {
-            background-color: #faf5ff;
+        .info-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            transition: left 0.6s;
         }
 
-        .bg-green-50 {
-            background-color: #f0fdf4;
+        .info-card:hover::after {
+            left: 100%;
         }
 
-        .bg-yellow-50 {
-            background-color: #fefce8;
+        .info-card:hover {
+            transform: translateX(10px) scale(1.02);
+            border-color: #667eea;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: -10px 0 30px rgba(102, 126, 234, 0.2);
         }
 
-        .bg-red-50 {
-            background-color: #fef2f2;
-        }
-
-        .p-6 {
-            padding: 24px;
-        }
-
-        .p-8 {
-            padding: 32px;
-        }
-
-        .p-4 {
-            padding: 16px;
-        }
-
-        .rounded-lg {
-            border-radius: 8px;
-        }
-
-        .text-6xl {
-            font-size: 3.75rem;
-            font-weight: bold;
-        }
-
-        .text-4xl {
-            font-size: 2.25rem;
-            font-weight: bold;
-        }
-
-        .text-3xl {
-            font-size: 1.875rem;
-        }
-
-        .text-2xl {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .text-xl {
-            font-size: 1.25rem;
-        }
-
-        .text-lg {
-            font-size: 1.125rem;
-        }
-
-        .text-md {
-            font-size: 1rem;
-        }
-
-        .text-sm {
-            font-size: 0.875rem;
-        }
-
-        .font-bold {
-            font-weight: bold;
-        }
-
-        .font-semibold {
-            font-weight: 600;
-        }
-
-        .text-gray-700 {
-            color: #374151;
-        }
-
-        .text-gray-600 {
-            color: #4b5563;
-        }
-
-        .text-gray-800 {
-            color: #1f2937;
-        }
-
-        .text-blue-900 {
-            color: #1e3a8a;
-        }
-
-        .text-purple-900 {
-            color: #581c87;
-        }
-
-        .text-green-900 {
-            color: #166534;
-        }
-
-        .mb-2 {
-            margin-bottom: 8px;
-        }
-
-        .mb-3 {
-            margin-bottom: 12px;
-        }
-
-        .mb-4 {
-            margin-bottom: 16px;
-        }
-
-        .mb-8 {
-            margin-bottom: 32px;
-        }
-
-        .mb-12 {
-            margin-bottom: 48px;
-        }
-
-        .mt-4 {
-            margin-top: 16px;
-        }
-
-        .mt-12 {
-            margin-top: 48px;
-        }
-
-        .border-l-4 {
-            border-left-width: 4px;
-        }
-
-        .border-green-500 {
-            border-color: #10b981;
-        }
-
-        .border-yellow-500 {
-            border-color: #eab308;
-        }
-
-        .grid {
-            display: grid;
-        }
-
-        .grid-cols-1 {
-            grid-template-columns: repeat(1, minmax(0, 1fr));
-        }
-
-        .grid-cols-2 {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-
-        .grid-cols-3 {
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-        }
-
-        .gap-4 {
-            gap: 16px;
-        }
-
-        .gap-6 {
-            gap: 24px;
-        }
-
-        .transform {
-            transform: translateX(0) translateY(0) rotate(0) skewX(0) skewY(0) scaleX(1) scaleY(1);
-        }
-
-        .hover-scale:hover {
-            transform: scale(1.05);
-        }
-
-        .transition-transform {
-            transition: transform 0.3s;
-        }
-
-        ul {
-            list-style-type: none;
-        }
-
-        li {
-            margin-bottom: 4px;
-        }
-
-        /* Controls */
-        .controls {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .control-button {
-            padding: 12px 24px;
-            background: #2563eb;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
+        .mini-card {
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
-            transition: background-color 0.3s;
+            position: relative;
+            overflow: hidden;
         }
 
-        .control-button:hover {
-            background: #1d4ed8;
+        .mini-card::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
         }
 
-        /* Responsive */
+        .mini-card:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .mini-card:hover {
+            transform: translateY(-15px) rotate(2deg);
+        }
+
+        .bg-blue-light {
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            border: 2px solid #0ea5e9;
+        }
+
+        .bg-purple-light {
+            background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+            border: 2px solid #a855f7;
+        }
+
+        .bg-green-light {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border: 2px solid #10b981;
+        }
+
+        .bg-red-light {
+            background: linear-gradient(135deg, #fecdd3 0%, #fda4af 100%);
+            border: 2px solid #f43f5e;
+        }
+
+        .highlight-card {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 5px solid #f59e0b;
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .highlight-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 50px rgba(245, 158, 11, 0.3);
+            border-left-width: 8px;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .nav-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 35px rgba(102, 126, 234, 0.6);
+        }
+
+        .nav-btn:active {
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            background: linear-gradient(135deg, #d1d5db, #9ca3af);
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+
+        .control-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border: none;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(240, 147, 251, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .control-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        .control-btn:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 35px rgba(240, 147, 251, 0.6);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #f093fb, #f5576c, #f093fb);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientFlow 3s ease infinite;
+            font-weight: 800;
+        }
+
+        @keyframes gradientFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .icon-check {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .slide-counter {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #6b7280;
+            padding: 10px 25px;
+            background: rgba(249, 250, 251, 0.8);
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+        }
+
         @media (max-width: 768px) {
-            .presentation {
-                padding: 30px;
+            .presentation-card {
+                padding: 30px 20px;
             }
             
             .slide-title {
@@ -385,65 +445,60 @@
             }
             
             .slide-subtitle {
-                font-size: 1.25rem;
-            }
-            
-            .text-6xl {
-                font-size: 2.5rem;
-            }
-            
-            .grid-cols-2,
-            .grid-cols-3 {
-                grid-template-columns: 1fr;
-            }
-            
-            .navigation {
-                padding: 0 30px;
+                font-size: 1.2rem;
             }
         }
 
-        /* PDF Styles */
         @media print {
             body {
                 background: white;
-                padding: 0;
             }
             
-            .presentation {
+            .presentation-card {
                 box-shadow: none;
-                border-radius: 0;
-                padding: 40px;
-                min-height: auto;
             }
             
-            .navigation,
-            .controls {
+            .nav-btn, .control-btn, .particle {
                 display: none;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div id="presentation" class="presentation">
-            <div class="slide-header">
-                <h1 class="slide-title" id="slideTitle">BrandScaper Africa</h1>
+    <!-- Floating particles -->
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+
+    <div class="presentation-container">
+        <div class="presentation-card animate__animated animate__fadeIn" id="presentation">
+            <div class="text-center mb-5">
+                <h1 class="slide-title" id="slideTitle">Brandscapers Africa</h1>
                 <h2 class="slide-subtitle" id="slideSubtitle">South African Marketing Excellence</h2>
             </div>
             
-            <div class="slide-content" id="slideContent">
-                <div class="text-center space-y-8">
-                    <div class="text-6xl font-bold gradient-text">
-                        BrandScaper Africa
+            <div id="slideContent" class="mb-5">
+                <div class="text-center">
+                    <div class="display-1 fw-bold gradient-text mb-4 animate__animated animate__bounceIn">
+                        Brandscapers Africa
                     </div>
-                    <div class="text-3xl text-gray-700">South African Marketing Excellence</div>
-                    <div class="mt-12 text-xl text-gray-600">A showcase of innovative agencies, campaigns, and leaders</div>
+                    <div class="fs-2 text-secondary mb-4 animate__animated animate__fadeInUp">
+                        South African Marketing Excellence
+                    </div>
+                    <div class="fs-4 text-muted animate__animated animate__fadeInUp animate__delay-1s">
+                        A showcase of innovative agencies, campaigns, and leaders
+                    </div>
                 </div>
             </div>
             
-            <div class="navigation">
-                <button id="prevButton" class="nav-button" disabled>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <div class="d-flex justify-content-between align-items-center mt-5 pt-4">
+                <button id="prevButton" class="nav-btn d-flex align-items-center gap-2" disabled>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polyline points="15 18 9 12 15 6"></polyline>
                     </svg>
                     Previous
@@ -451,34 +506,52 @@
                 
                 <div class="slide-counter" id="slideCounter">1 / 6</div>
                 
-                <button id="nextButton" class="nav-button">
+                <button id="nextButton" class="nav-btn d-flex align-items-center gap-2">
                     Next
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polyline points="9 18 15 12 9 6"></polyline>
                     </svg>
                 </button>
             </div>
         </div>
         
-        <div class="controls">
-            <button id="downloadPdf" class="control-button">Download as PDF</button>
-            <button id="printPdf" class="control-button">Print Presentation</button>
+        <div class="text-center mt-4">
+            <button id="downloadPdf" class="control-btn me-3">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline; margin-right: 8px;">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Download PDF
+            </button>
+            <button id="printPdf" class="control-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline; margin-right: 8px;">
+                    <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                    <rect x="6" y="14" width="12" height="8"></rect>
+                </svg>
+                Print
+            </button>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Presentation data
         const slides = [
             {
                 title: "BrandScaper Africa",
                 subtitle: "South African Marketing Excellence",
                 content: `
-                    <div class="text-center space-y-8">
-                        <div class="text-6xl font-bold gradient-text">
+                    <div class="text-center">
+                        <div class="display-1 fw-bold gradient-text mb-4 animate__animated animate__bounceIn">
                             BrandScaper Africa
                         </div>
-                        <div class="text-3xl text-gray-700">South African Marketing Excellence</div>
-                        <div class="mt-12 text-xl text-gray-600">A showcase of innovative agencies, campaigns, and leaders</div>
+                        <div class="fs-2 text-secondary mb-4 animate__animated animate__fadeInUp">
+                            South African Marketing Excellence
+                        </div>
+                        <div class="fs-4 text-muted animate__animated animate__fadeInUp animate__delay-1s">
+                            A showcase of innovative agencies, campaigns, and leaders
+                        </div>
                     </div>
                 `
             },
@@ -486,25 +559,25 @@
                 title: "DNA Brand Architects",
                 subtitle: "Award-Winning Marketing Excellence",
                 content: `
-                    <div class="space-y-6">
-                        <div class="gradient-bg-blue p-6 rounded-lg">
-                            <h3 class="text-2xl font-bold mb-2">What They Do</h3>
-                            <p class="text-lg">Award-winning marketing and brand agency supporting major African brands through brand strategy, reputation management, content creation, and public relations</p>
+                    <div class="animate__animated animate__fadeIn">
+                        <div class="gradient-card gradient-blue mb-4">
+                            <h3 class="fs-2 fw-bold mb-3">What They Do</h3>
+                            <p class="fs-5 mb-0">Award-winning marketing and brand agency supporting major African brands through brand strategy, reputation management, content creation, and public relations</p>
                         </div>
                         
-                        <div class="bg-gray-50 p-6 rounded-lg">
-                            <h3 class="text-2xl font-bold mb-4 text-gray-800">Key Brands</h3>
-                            <ul class="space-y-2 text-lg text-gray-700">
-                                <li>• Nedbank (Consumer PR)</li>
-                                <li>• Volvo Cars South Africa (PR & Reputation Management)</li>
-                                <li>• Multiple blue-chip clients across Africa</li>
+                        <div class="info-card mb-4">
+                            <h3 class="fs-2 fw-bold mb-4 text-dark">Key Brands</h3>
+                            <ul class="list-unstyled fs-5">
+                                <li class="mb-3">🔹 Nedbank (Consumer PR)</li>
+                                <li class="mb-3">🔹 Volvo Cars South Africa (PR & Reputation Management)</li>
+                                <li class="mb-3">🔹 Multiple blue-chip clients across Africa</li>
                             </ul>
                         </div>
                         
-                        <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
-                            <h3 class="text-2xl font-bold mb-2 text-gray-800">Why Them?</h3>
-                            <p class="text-lg text-gray-700">Four consecutive PRISM Agency of the Year titles and named South Africa's Most Admired PR Agency for three years. Recognized as 100% black-owned with innovative, consumer-driven campaigns</p>
-                            <p class="text-md text-gray-600 mt-4"><strong>Leadership:</strong> Sylvester Chauke, CEO</p>
+                        <div class="highlight-card">
+                            <h3 class="fs-2 fw-bold mb-3 text-dark">Why Them?</h3>
+                            <p class="fs-5 text-dark mb-3">Four consecutive PRISM Agency of the Year titles and named South Africa's Most Admired PR Agency for three years. Recognized as 100% black-owned with innovative, consumer-driven campaigns</p>
+                            <p class="fs-6 text-dark"><strong>Leadership:</strong> Sylvester Chauke, CEO</p>
                         </div>
                     </div>
                 `
@@ -513,30 +586,36 @@
                 title: "Primedia Group",
                 subtitle: "Leading African Media Powerhouse",
                 content: `
-                    <div class="space-y-6">
-                        <div class="gradient-bg-red p-6 rounded-lg">
-                            <h3 class="text-2xl font-bold mb-2">What They Do</h3>
-                            <p class="text-lg">Leading African media and advertising group with divisions in broadcasting, outdoor advertising, in-store retail media, and content production</p>
+                    <div class="animate__animated animate__fadeIn">
+                        <div class="gradient-card gradient-red mb-4">
+                            <h3 class="fs-2 fw-bold mb-3">What They Do</h3>
+                            <p class="fs-5 mb-0">Leading African media and advertising group with divisions in broadcasting, outdoor advertising, in-store retail media, and content production</p>
                         </div>
                         
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div class="bg-blue-50 p-4 rounded-lg">
-                                <h4 class="font-bold text-lg mb-2 text-blue-900">Broadcasting</h4>
-                                <p class="text-sm text-gray-700">947, 702, Kfm 94.5, CapeTalk, Eyewitness News</p>
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-4">
+                                <div class="mini-card bg-blue-light h-100">
+                                    <h4 class="fw-bold fs-4 mb-3 text-primary">📻 Broadcasting</h4>
+                                    <p class="text-dark">947, 702, Kfm 94.5, CapeTalk, Eyewitness News</p>
+                                </div>
                             </div>
-                            <div class="bg-purple-50 p-4 rounded-lg">
-                                <h4 class="font-bold text-lg mb-2 text-purple-900">Outdoor</h4>
-                                <p class="text-sm text-gray-700">Classic billboards, digital screens, commuter advertising, street furniture, programmatic advertising</p>
+                            <div class="col-md-4">
+                                <div class="mini-card bg-purple-light h-100">
+                                    <h4 class="fw-bold fs-4 mb-3 text-purple">🎯 Outdoor</h4>
+                                    <p class="text-dark">Classic billboards, digital screens, commuter advertising, street furniture, programmatic advertising</p>
+                                </div>
                             </div>
-                            <div class="bg-green-50 p-4 rounded-lg">
-                                <h4 class="font-bold text-lg mb-2 text-green-900">In-Store</h4>
-                                <p class="text-sm text-gray-700">Retail media solutions across 1500+ leading grocery, pharmacy, and liquor retailers</p>
+                            <div class="col-md-4">
+                                <div class="mini-card bg-green-light h-100">
+                                    <h4 class="fw-bold fs-4 mb-3 text-success">🛒 In-Store</h4>
+                                    <p class="text-dark">Retail media solutions across 1500+ leading grocery, pharmacy, and liquor retailers</p>
+                                </div>
                             </div>
                         </div>
                         
-                        <div class="bg-yellow-50 p-6 rounded-lg border-l-4 border-yellow-500">
-                            <h3 class="text-2xl font-bold mb-2 text-gray-800">Why Them?</h3>
-                            <p class="text-lg text-gray-700">Largest wholly South African-owned out-of-home media specialist with 18,000 advertising panels across South Africa and 4,000 across 8 African countries</p>
+                        <div class="highlight-card">
+                            <h3 class="fs-2 fw-bold mb-3 text-dark">Why Them?</h3>
+                            <p class="fs-5 text-dark mb-0">Largest wholly South African-owned out-of-home media specialist with 18,000 advertising panels across South Africa and 4,000 across 8 African countries</p>
                         </div>
                     </div>
                 `
@@ -545,27 +624,27 @@
                 title: "Vaseline Heritage Day Campaign",
                 subtitle: "Cultural Authenticity in Action",
                 content: `
-                    <div class="space-y-6">
-                        <div class="gradient-bg-teal p-6 rounded-lg">
-                            <h3 class="text-2xl font-bold mb-2">The Campaign</h3>
-                            <p class="text-lg">Centered around "some traditions are not passed down—they're rubbed in," capturing the ritual of grandparents applying Vaseline to children's skin as a metaphor for love, protection, and legacy</p>
+                    <div class="animate__animated animate__fadeIn">
+                        <div class="gradient-card gradient-teal mb-4">
+                            <h3 class="fs-2 fw-bold mb-3">The Campaign</h3>
+                            <p class="fs-5 mb-0">Centered around "some traditions are not passed down—they're rubbed in," capturing the ritual of grandparents applying Vaseline to children's skin as a metaphor for love, protection, and legacy</p>
                         </div>
                         
-                        <div class="bg-gray-50 p-6 rounded-lg">
-                            <h3 class="text-2xl font-bold mb-3 text-gray-800">Agency & Broadcasting</h3>
-                            <p class="text-lg mb-4 text-gray-700"><strong>Created by:</strong> VML South Africa</p>
-                            <p class="text-lg mb-3 text-gray-700"><strong>Broadcast Partner:</strong> The campaign gained significant reach through multiple channels, with social media amplification playing a crucial role in its organic spread across South African communities</p>
-                            <div class="mt-4 space-y-1 text-gray-700">
-                                <p><strong>Executive Creative Director:</strong> Nhlanhla "Solomon" Ngcobo</p>
-                                <p><strong>Chief Creative Officer:</strong> Fran Luckin</p>
-                                <p><strong>Creative Team:</strong> Navini Ramsamie, Lesego Mkhize</p>
-                                <p><strong>Head of Marketing (Vaseline):</strong> Kenosi Matsebatlela</p>
+                        <div class="info-card mb-4">
+                            <h3 class="fs-2 fw-bold mb-4 text-dark">Agency & Broadcasting</h3>
+                            <p class="fs-5 mb-3 text-dark"><strong>Created by:</strong> VML South Africa</p>
+                            <p class="fs-5 mb-4 text-dark"><strong>Broadcast Partner:</strong> The campaign gained significant reach through multiple channels, with social media amplification playing a crucial role in its organic spread across South African communities</p>
+                            <div class="mt-4">
+                                <p class="mb-2 text-dark"><strong>Executive Creative Director:</strong> Nhlanhla "Solomon" Ngcobo</p>
+                                <p class="mb-2 text-dark"><strong>Chief Creative Officer:</strong> Fran Luckin</p>
+                                <p class="mb-2 text-dark"><strong>Creative Team:</strong> Navini Ramsamie, Lesego Mkhize</p>
+                                <p class="mb-0 text-dark"><strong>Head of Marketing (Vaseline):</strong> Kenosi Matsebatlela</p>
                             </div>
                         </div>
                         
-                        <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
-                            <h3 class="text-2xl font-bold mb-2 text-gray-800">Impact</h3>
-                            <p class="text-lg text-gray-700">The deeply personal campaign resonated with black South Africans who took to social media saying it felt like recognition, creating cultural unity and celebrating the ritual passed down through generations. The campaign's authenticity drove organic engagement and emotional connection across communities.</p>
+                        <div class="highlight-card">
+                            <h3 class="fs-2 fw-bold mb-3 text-dark">Impact</h3>
+                            <p class="fs-5 text-dark mb-0">The deeply personal campaign resonated with black South Africans who took to social media saying it felt like recognition, creating cultural unity and celebrating the ritual passed down through generations. The campaign's authenticity drove organic engagement and emotional connection across communities.</p>
                         </div>
                     </div>
                 `
@@ -574,37 +653,37 @@
                 title: "Bongiwe Sithole",
                 subtitle: "Marketing Role Model",
                 content: `
-                    <div class="space-y-6">
-                        <div class="gradient-bg-purple p-6 rounded-lg">
-                            <h3 class="text-2xl font-bold mb-2">Professional Background</h3>
-                            <p class="text-lg">Marketing Manager and Communications & Media Strategist at Mtiya Dynamic, former journalist and content producer at Arena Holdings</p>
+                    <div class="animate__animated animate__fadeIn">
+                        <div class="gradient-card gradient-purple mb-4">
+                            <h3 class="fs-2 fw-bold mb-3">Professional Background</h3>
+                            <p class="fs-5 mb-0">Marketing Manager and Communications & Media Strategist at Mtiya Dynamic, former journalist and content producer at Arena Holdings</p>
                         </div>
                         
-                        <div class="bg-blue-50 p-6 rounded-lg">
-                            <h3 class="text-2xl font-bold mb-4 text-gray-800">Why a Role Model?</h3>
-                            <div class="space-y-3 text-gray-700">
-                                <div>
-                                    <p class="font-semibold text-lg">Thought Leadership</p>
-                                    <p>Speaks on influencer marketing effectiveness, consumer behavior, and shopper marketing across diverse retail environments</p>
+                        <div class="info-card mb-4">
+                            <h3 class="fs-2 fw-bold mb-4 text-dark">Why a Role Model?</h3>
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <p class="fw-bold fs-5 text-dark mb-2">💡 Thought Leadership</p>
+                                    <p class="text-dark">Speaks on influencer marketing effectiveness, consumer behavior, and shopper marketing across diverse retail environments</p>
                                 </div>
-                                <div>
-                                    <p class="font-semibold text-lg">Industry Impact</p>
-                                    <p>Active participant in Effie Awards South Africa dialogue on marketing effectiveness</p>
+                                <div class="col-12">
+                                    <p class="fw-bold fs-5 text-dark mb-2">🎯 Industry Impact</p>
+                                    <p class="text-dark">Active participant in Effie Awards South Africa dialogue on marketing effectiveness</p>
                                 </div>
-                                <div>
-                                    <p class="font-semibold text-lg">Expertise</p>
-                                    <p>Specializes in authentic storytelling, brand strategy, and creating content that resonates with South African audiences</p>
+                                <div class="col-12">
+                                    <p class="fw-bold fs-5 text-dark mb-2">⭐ Expertise</p>
+                                    <p class="text-dark">Specializes in authentic storytelling, brand strategy, and creating content that resonates with South African audiences</p>
                                 </div>
-                                <div>
-                                    <p class="font-semibold text-lg">Advocacy</p>
-                                    <p>Champions understanding diverse consumer needs across different retail environments from pharmacies to informal trade</p>
+                                <div class="col-12">
+                                    <p class="fw-bold fs-5 text-dark mb-2">🚀 Advocacy</p>
+                                    <p class="text-dark">Champions understanding diverse consumer needs across different retail environments from pharmacies to informal trade</p>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="bg-yellow-50 p-6 rounded-lg border-l-4 border-yellow-500">
-                            <h3 class="text-2xl font-bold mb-2 text-gray-800">Key Philosophy</h3>
-                            <p class="text-lg text-gray-700">Emphasizes authenticity, relatability, and natural content over overly produced marketing—aligning with the success of campaigns like Vaseline's Heritage Day</p>
+                        <div class="highlight-card">
+                            <h3 class="fs-2 fw-bold mb-3 text-dark">Key Philosophy</h3>
+                            <p class="fs-5 text-dark mb-0">Emphasizes authenticity, relatability, and natural content over overly produced marketing—aligning with the success of campaigns like Vaseline's Heritage Day</p>
                         </div>
                     </div>
                 `
@@ -613,46 +692,52 @@
                 title: "Key Takeaways",
                 subtitle: "The Common Thread",
                 content: `
-                    <div class="space-y-8">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="bg-blue-50 p-6 rounded-lg transform hover-scale transition-transform">
-                                <div class="text-4xl mb-2">✓</div>
-                                <h3 class="text-xl font-bold mb-2 text-gray-800">DNA Brand Architects</h3>
-                                <p class="text-gray-700">Black-owned excellence in brand strategy</p>
+                    <div class="animate__animated animate__fadeIn">
+                        <div class="row g-4 mb-5">
+                            <div class="col-md-6">
+                                <div class="mini-card bg-blue-light h-100">
+                                    <div class="icon-check text-white">✓</div>
+                                    <h3 class="fs-3 fw-bold mb-3 text-primary">DNA Brand Architects</h3>
+                                    <p class="fs-5 text-dark mb-0">Black-owned excellence in brand strategy</p>
+                                </div>
                             </div>
                             
-                            <div class="bg-red-50 p-6 rounded-lg transform hover-scale transition-transform">
-                                <div class="text-4xl mb-2">✓</div>
-                                <h3 class="text-xl font-bold mb-2 text-gray-800">Primedia Group</h3>
-                                <p class="text-gray-700">Unmatched reach across multiple media touchpoints</p>
+                            <div class="col-md-6">
+                                <div class="mini-card bg-red-light h-100">
+                                    <div class="icon-check text-white">✓</div>
+                                    <h3 class="fs-3 fw-bold mb-3 text-danger">Primedia Group</h3>
+                                    <p class="fs-5 text-dark mb-0">Unmatched reach across multiple media touchpoints</p>
+                                </div>
                             </div>
                             
-                            <div class="bg-green-50 p-6 rounded-lg transform hover-scale transition-transform">
-                                <div class="text-4xl mb-2">✓</div>
-                                <h3 class="text-xl font-bold mb-2 text-gray-800">Vaseline/VML</h3>
-                                <p class="text-gray-700">Cultural authenticity drives emotional connection</p>
+                            <div class="col-md-6">
+                                <div class="mini-card bg-green-light h-100">
+                                    <div class="icon-check text-white">✓</div>
+                                    <h3 class="fs-3 fw-bold mb-3 text-success">Vaseline/VML</h3>
+                                    <p class="fs-5 text-dark mb-0">Cultural authenticity drives emotional connection</p>
+                                </div>
                             </div>
                             
-                            <div class="bg-purple-50 p-6 rounded-lg transform hover-scale transition-transform">
-                                <div class="text-4xl mb-2">✓</div>
-                                <h3 class="text-xl font-bold mb-2 text-gray-800">Bongiwe Sithole</h3>
-                                <p class="text-gray-700">Leading voice in effective, authentic marketing</p>
+                            <div class="col-md-6">
+                                <div class="mini-card bg-purple-light h-100">
+                                    <div class="icon-check text-white">✓</div>
+                                    <h3 class="fs-3 fw-bold mb-3 text-purple">Bongiwe Sithole</h3>
+                                    <p class="fs-5 text-dark mb-0">Leading voice in effective, authentic marketing</p>
+                                </div>
                             </div>
                         </div>
                         
-                        <div class="gradient-bg-orange p-8 rounded-lg text-center">
-                            <h3 class="text-3xl font-bold mb-3">The Common Thread</h3>
-                            <p class="text-xl">Understanding and celebrating South African culture drives marketing success</p>
+                        <div class="gradient-card gradient-orange text-center">
+                            <h3 class="display-4 fw-bold mb-4">The Common Thread</h3>
+                            <p class="fs-3 mb-0">Understanding and celebrating South African culture drives marketing success</p>
                         </div>
                     </div>
                 `
             }
         ];
 
-        // Current slide state
         let currentSlide = 0;
 
-        // DOM elements
         const slideTitle = document.getElementById('slideTitle');
         const slideSubtitle = document.getElementById('slideSubtitle');
         const slideContent = document.getElementById('slideContent');
@@ -661,21 +746,33 @@
         const nextButton = document.getElementById('nextButton');
         const downloadPdfButton = document.getElementById('downloadPdf');
         const printPdfButton = document.getElementById('printPdf');
+        const presentationCard = document.querySelector('.presentation-card');
 
-        // Update slide content
         function updateSlide() {
             const slide = slides[currentSlide];
-            slideTitle.textContent = slide.title;
-            slideSubtitle.textContent = slide.subtitle;
-            slideContent.innerHTML = slide.content;
-            slideCounter.textContent = `${currentSlide + 1} / ${slides.length}`;
             
-            // Update button states
-            prevButton.disabled = currentSlide === 0;
-            nextButton.disabled = currentSlide === slides.length - 1;
+            // Add exit animation
+            presentationCard.classList.add('animate__fadeOut');
+            
+            setTimeout(() => {
+                slideTitle.textContent = slide.title;
+                slideSubtitle.textContent = slide.subtitle;
+                slideContent.innerHTML = slide.content;
+                slideCounter.textContent = `${currentSlide + 1} / ${slides.length}`;
+                
+                // Update button states
+                prevButton.disabled = currentSlide === 0;
+                nextButton.disabled = currentSlide === slides.length - 1;
+                
+                // Add enter animation
+                presentationCard.classList.remove('animate__fadeOut');
+                presentationCard.classList.add('animate__fadeIn');
+                
+                // Scroll to top of presentation
+                presentationCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 300);
         }
 
-        // Navigation functions
         function nextSlide() {
             if (currentSlide < slides.length - 1) {
                 currentSlide++;
@@ -690,7 +787,6 @@
             }
         }
 
-        // PDF download function
         function downloadPDF() {
             const element = document.getElementById('presentation');
             const opt = {
@@ -704,7 +800,6 @@
             html2pdf().set(opt).from(element).save();
         }
 
-        // Print function
         function printPDF() {
             window.print();
         }
@@ -722,6 +817,17 @@
             } else if (e.key === 'ArrowLeft') {
                 prevSlide();
             }
+        });
+
+        // Animate particles
+        const particles = document.querySelectorAll('.particle');
+        particles.forEach((particle, index) => {
+            setInterval(() => {
+                const randomX = Math.random() * 100;
+                const randomY = Math.random() * 100;
+                particle.style.left = randomX + '%';
+                particle.style.top = randomY + '%';
+            }, 8000 + index * 1000);
         });
 
         // Initialize the presentation
