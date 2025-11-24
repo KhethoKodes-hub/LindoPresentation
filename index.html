@@ -1164,6 +1164,46 @@
 .mini-card h4 {
     text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
 }
+
+/* Brandscapers Logo as subtle background watermark */
+/* Brandscapers Logo as full slide background - Recommended */
+.slide[data-slide="1"] .slide-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('assets/brandscaperLogo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.1;
+    z-index: 1;
+    pointer-events: none;
+    animation: gentlePulse 8s ease-in-out infinite;
+}
+
+.slide[data-slide="1"] .slide-content {
+    position: relative;
+    z-index: 2;
+}
+
+@keyframes gentlePulse {
+    0%, 100% { opacity: 0.08; }
+    50% { opacity: 0.15; }
+}
+.slide[data-slide="1"] .slide-content {
+    position: relative;
+    z-index: 2;
+}
+
+@keyframes gentlePulse {
+    0%, 100% { opacity: 0.08; }
+    50% { opacity: 0.15; }
+}
+
+
     </style>
 </head>
 <body>
@@ -1226,24 +1266,28 @@
     </div>
 
     <!-- Slide 1: Main Title -->
-    <div class="slide active" data-slide="1">
-        <div class="slide-container">
-            <div class="slide-content">
-                <div class="hero-section">
-                    <h1 class="glitch-text" data-text="CREATIVE ECONOMY">CREATIVE ECONOMY</h1>
-                    <p class="subtitle-modern">Workshop Insights & Industry Excellence</p>
-                    <p style="color: rgba(255,255,255,0.8); font-size: 1.2rem; line-height: 1.8; max-width: 900px; margin: 30px auto;">
-                        A comprehensive journey through South Africa's creative economy—from transformative workshop learnings to showcasing industry-leading agencies, campaigns, and creative pioneers.
+  <div class="slide active" data-slide="1">
+    <div class="slide-container">
+        <div class="slide-content">
+            <div class="hero-section">
+                <h1 class="glitch-text" data-text="CREATIVE ECONOMY">CREATIVE ECONOMY</h1>
+                <p class="subtitle-modern">Workshop Insights & Industry Excellence</p>
+                <p style="color: rgba(255,255,255,0.8); font-size: 1.2rem; line-height: 1.8; max-width: 900px; margin: 30px auto;">
+                    A comprehensive journey through South Africa's creative economy—from transformative workshop learnings to showcasing industry-leading agencies, campaigns, and creative pioneers.
+                </p>
+                <div class="mt-4">
+                    <p style="color: rgba(255,255,255,0.7); font-size: 1rem;">
+                        <i class="fas fa-mobile-alt me-2"></i> Swipe or use arrows to navigate
                     </p>
-                    <div class="mt-4">
-                        <p style="color: rgba(255,255,255,0.7); font-size: 1rem;">
-                            <i class="fas fa-mobile-alt me-2"></i> Swipe or use arrows to navigate
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>
+        <!-- Brandscapers Logo -->
+        <div class="brandscapers-logo">
+            <img >
+        </div>
     </div>
+</div>
 
     <!-- Slide 2: Workshop Overview -->
     <div class="slide" data-slide="2">
